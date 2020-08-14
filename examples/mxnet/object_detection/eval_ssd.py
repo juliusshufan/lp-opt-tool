@@ -222,7 +222,7 @@ if __name__ == '__main__':
 
         return mAP
         
-    # Doing iLiT auto-tuning here
+    # Doing ilit auto-tuning here
     import ilit
     ssd_tuner = ilit.Tuner("./ssd.yaml")
     ssd_tuner.tune(net, q_dataloader=val_data, eval_dataloader=val_dataset, eval_func=eval_func)

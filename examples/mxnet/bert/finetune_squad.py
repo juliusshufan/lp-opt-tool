@@ -846,7 +846,7 @@ def preprocess_dataset(tokenizer,
 
 
 def gen_dataset():
-    """generate dataset for iLiT."""
+    """generate dataset for ilit."""
     log.info('Loading dev data...')
     if version_2:
         dev_data = SQuAD('dev', version='2.0')
@@ -880,7 +880,7 @@ def gen_dataset():
     return dev_dataloader
 
 def eval_func(model):
-    """evaluation function for iLiT."""
+    """evaluation function for ilit."""
     EM_acc = evaluate(model)
     return EM_acc
 
@@ -899,7 +899,7 @@ if __name__ == '__main__':
         evaluate()
     elif model_parameters or deploy:
         # evaluate()
-        # iLiT auto-tuning
+        # ilit auto-tuning
         dev_dataloader = gen_dataset()
         import ilit
         bert_tuner = ilit.Tuner("./bert.yaml")

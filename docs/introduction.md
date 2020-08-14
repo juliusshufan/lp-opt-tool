@@ -1,7 +1,7 @@
 Introduction
 =========================================
 
-Intel Low Precision Tool (iLiT) is a opensource python library to help users to fast deploy low-precision inference solution on popular DL frameworks including TensorFlow, PyTorch, MxNet etc. It is accuracy-driven objective tuning in tuning space and support different strategies.
+Intel Low Precision Optimization Tool is a opensource python library to help users to fast deploy low-precision inference solution on popular DL frameworks including TensorFlow, PyTorch, MxNet etc. It is accuracy-driven objective tuning in tuning space and support different strategies.
 
 # Infrastructure
 
@@ -22,15 +22,15 @@ Intel Low Precision Tool (iLiT) is a opensource python library to help users to 
 
    The tuning config and model-specific information are controlled by user config yaml file. As for the format of yaml file, please refer to [template.yaml](../examples/template.yaml)
 
-   iLiT v1.0a release supports two usages:
+   Intel® Low Precision Optimization Tool v1.0a release supports two usages:
 
    a) User specifies fp32 "model", calibration dataset "q_dataloader", evaluation dataset "eval_dataloader" and metric in tuning.metric field of model-specific yaml config file.
 
    b) User specifies fp32 "model", calibration dataset "q_dataloader" and a custom "eval_func" which encapsulates the evaluation dataset and metric by itself.
 
-   The first usage is designed for seamless integrating user code with iLiT as well as the metric is supported by iLiT. Usually classfication networks are suitable for this.
+   The first usage is designed for seamless integrating user code with Intel® Low Precision Optimization Tool as well as the metric is supported by Intel® Low Precision Optimization Tool. Usually classfication networks are suitable for this.
 
-   The second usage is designed for integrating those networks using iLiT not supported metrics with iLiT. Usually object detection and NLP networks are suitable for this.
+   The second usage is designed for integrating those networks using Intel® Low Precision Optimization Tool not supported metrics with Intel® Low Precision Optimization Tool. Usually object detection and NLP networks are suitable for this.
 
 2. Framework Adaption API
 
@@ -38,7 +38,7 @@ Intel Low Precision Tool (iLiT) is a opensource python library to help users to 
 
 3. Extension API
 
-   iLiT is easy to add new strategies, framework adaption layers, metrics and objectives easily by well-designed API.
+   Intel® Low Precision Optimization Tool is easy to add new strategies, framework adaption layers, metrics and objectives easily by well-designed API.
 
    To add a new framework adaption layer, user just need inherit "Adaptor" class and implement a subclass under adaptor directory.
 
@@ -58,11 +58,11 @@ Intel Low Precision Tool (iLiT) is a opensource python library to help users to 
 
 ### Basic Strategy
 
-This strategy is iLiT default tuning strategy, which does model-wise tuning by adjusting gloabl tuning parameters, such as calibration related parameters, kl or minmax algo, quantization related parameters, symmetric or asymmetric, per_channel or per_tensor. If the model-wise tuning result does not meet accuracy goal, this strategy will attempt to do op-wise fallback from bottom to top to prioritize which fallback op has biggest impact on final accuracy, and then do incremental fallback till achieving the accuracy goal.
+This strategy is Intel® Low Precision Optimization Tool default tuning strategy, which does model-wise tuning by adjusting gloabl tuning parameters, such as calibration related parameters, kl or minmax algo, quantization related parameters, symmetric or asymmetric, per_channel or per_tensor. If the model-wise tuning result does not meet accuracy goal, this strategy will attempt to do op-wise fallback from bottom to top to prioritize which fallback op has biggest impact on final accuracy, and then do incremental fallback till achieving the accuracy goal.
 
 ### Bayersian Strategy
 
-Bayesian optimization is a sequential design strategy for global optimization of black-box functions. The strategy refers to the Bayesian optimization package [bayesian-optimization](https://github.com/fmfn/BayesianOptimization) and changes it to a discrete version that complies with the iLiT strategy standard. It uses Gaussian Processes to define the prior/posterior distribution over the black-box function, and then finds the tuning config that maximizes the expected improvement.
+Bayesian optimization is a sequential design strategy for global optimization of black-box functions. The strategy refers to the Bayesian optimization package [bayesian-optimization](https://github.com/fmfn/BayesianOptimization) and changes it to a discrete version that complies with the Intel® Low Precision Optimization Tool strategy standard. It uses Gaussian Processes to define the prior/posterior distribution over the black-box function, and then finds the tuning config that maximizes the expected improvement.
 
 ### MSE Strategy
 
@@ -70,11 +70,11 @@ This strategy is very similar to the basic strategy. It needs to get the tensors
 
 # Objectives
 
-iLiT supports below 3 build-in objectives:
+Intel® Low Precision Optimization Tool supports below 3 build-in objectives:
 
 ### 1. Performance
 
-This objective is used to measure performance of quantized model with accuracy driven. It is default objective iLiT supported.
+This objective is used to measure performance of quantized model with accuracy driven. It is default objective Intel® Low Precision Optimization Tool supported.
 
 ### 2. Memory Footprint
 
@@ -86,4 +86,4 @@ This objective is used to measure the memory size of quantized model with accura
 
 # Metrics
 
-iLiT supports 3 built-in metrics, Topk, F1 and CocoMAP. The metric is easily extensible as well as contributor implements a subclass of Metric class.
+Intel® Low Precision Optimization Tool supports 3 built-in metrics, Topk, F1 and CocoMAP. The metric is easily extensible as well as contributor implements a subclass of Metric class.

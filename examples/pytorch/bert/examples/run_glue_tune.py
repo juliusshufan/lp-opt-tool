@@ -487,8 +487,8 @@ def main():
                         help="Whether to run int8 inference.")
     parser.add_argument("--do_bf16", action='store_true',
                         help="run bf16 evaluation / training.")
-    parser.add_argument("--do_ilit_tune", action='store_true',
-                        help="run iLiT tool to tune int8 acc.")
+    parser.add_argument("--tune", action='store_true',
+                        help="run ilit to tune int8 acc.")
     parser.add_argument("--warmup", type=int, default=2,
                         help="warmup for performance")
 
@@ -535,7 +535,7 @@ def main():
     label_list = processor.get_labels()
     num_labels = len(label_list)
     mix_qkv = False
-    if args.do_calibration or args.do_int8_inference or args.do_ilit_tune:
+    if args.do_calibration or args.do_int8_inference or args.tune:
        mix_qkv = True 
     # Load pretrained model and tokenizer
     if args.local_rank not in [-1, 0]:
@@ -616,7 +616,7 @@ def main():
                result = dict((k + '_{}'.format(global_step), v) for k, v in result.items())
                results.update(result)
 
-            if args.do_ilit_tune:
+            if args.tune:
                 def eval_func_for_ilit(model):
                     result, perf = evaluate(args, model, tokenizer, prefix=prefix)
                     bert_task_acc_keys = ['acc_and_f1', 'f1', 'mcc', 'spearmanr', 'acc']

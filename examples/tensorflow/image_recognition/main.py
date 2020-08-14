@@ -188,7 +188,7 @@ class eval_classifier_optimized_graph:
     self.validate_args()
 
   def auto_tune(self):
-    """This is iLiT tuning part to generate a quantized pb
+    """This is ilit tuning part to generate a quantized pb
 
     Returns:
         graph: it will return a quantized pb

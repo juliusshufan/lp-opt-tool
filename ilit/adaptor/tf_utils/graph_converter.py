@@ -149,7 +149,7 @@ class GraphConverter:
         :param excluded_nodes: list of nodes to be excluded from quantization.
         :param per_channel: if set True, enables weight quantization channel-wise.
         """
-        # For iLiT, the input_graph is not graph file path but Graph object.
+        # For ilit, the input_graph is not graph file path but Graph object.
         self.input_graph = input_graph.as_graph_def()
         self.output_graph = output_graph
         self.inputs = inputs

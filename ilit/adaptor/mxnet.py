@@ -19,7 +19,7 @@ mx = LazyImport("mxnet")
 logging.basicConfig(level=logging.INFO,
                     datefmt='[%H:%M:%S]',
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger("iLiT-MXNet")
+logger = logging.getLogger("MXNet")
 
 def _check_version(v1, v2):
     """version checkout functioin.
@@ -159,7 +159,7 @@ class MxNetAdaptor(Adaptor):
         Args:
             model (object): model to do evaluate.
             dataloader (object): dataset to do evaluate.
-            metric (iLiT metric object): evaluate metric.
+            metric (metric object): evaluate metric.
 
         Returns:
             acc: evaluate result.
@@ -508,7 +508,7 @@ class MxNetAdaptor(Adaptor):
         """Convert the strategy config to MXNet quantization config.
 
         Args:
-            tune_cfg (dict): tune config from iLiT strategy.
+            tune_cfg (dict): tune config from ilit strategy.
                             cfg should be a format like below:
                             {
                                 'fuse': {'int8': [['CONV2D', 'RELU', 'BN'], ['CONV2D', 'RELU']], 'fp32': [['CONV2D', 'RELU', 'BN']]},
@@ -671,11 +671,11 @@ class MxNetAdaptor(Adaptor):
         th_dict = {}
         # copy hist_dict keys since the keys() only returns a view in python3
         layer_names = list(hist_dict.keys())
-        ilit_kl = KL_Divergence()
+        _kl = KL_Divergence()
         for name in layer_names:
             assert name in hist_dict
             (hist, hist_edges, min_val, max_val, _) = hist_dict[name]
-            th = ilit_kl.get_threshold(hist,
+            th = _kl.get_threshold(hist,
                                         hist_edges,
                                         min_val,
                                         max_val,
@@ -740,9 +740,9 @@ class MxNetAdaptor(Adaptor):
         layer_tensor = self._inspect_tensor((sym, arg_params, aux_params), dataloader=calib_data, op_list=calib_layer)
 
         if len(self.__config_dict["calib_kl_layers"]) != 0:
-            iLiT_histogram = LayerHistogramCollector(layer_tensor=layer_tensor, include_layer=self.__config_dict["calib_kl_layers"])
-            iLiT_histogram.collect()
-            hist_dict = iLiT_histogram.hist_dict
+            _histogram = LayerHistogramCollector(layer_tensor=layer_tensor, include_layer=self.__config_dict["calib_kl_layers"])
+            _histogram.collect()
+            hist_dict = _histogram.hist_dict
             if logger:
                 logger.info('Calculating optimal thresholds for quantization')
             th_dict_kl = self._get_optimal_thresholds(hist_dict, quantized_dtype, logger=logger)

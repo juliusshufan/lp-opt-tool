@@ -481,7 +481,7 @@ if __name__ == "__main__":
     parser.add_argument("--mlperf-auc-threshold", type=float, default=0.0)
     parser.add_argument("--mlperf-bin-loader", action='store_true', default=False)
     parser.add_argument("--mlperf-bin-shuffle", action='store_true', default=False)
-    parser.add_argument("--do-iLiT-tune", action='store_true', default=False)
+    parser.add_argument("--tune", action='store_true', default=False)
     args = parser.parse_args()
 
     if args.mlperf_logging:
@@ -839,8 +839,7 @@ if __name__ == "__main__":
             )
         )
 
-    if args.do_iLiT_tune:
-        print('do_iLiT_tune')
+    if args.tune:
         eval_dataloader = DLRM_DataLoader(test_ld)
         fuse_list = []
         for i in range(0, len(dlrm.bot_l), 2):
@@ -858,7 +857,7 @@ if __name__ == "__main__":
         tuner = ilit.Tuner("./conf.yaml")
         tuner.tune(dlrm, eval_dataloader, eval_func=eval_func)
 
-        # run int8 model without iLiT tuning
+        # run int8 model without ilit tuning
         dlrm.qconfig = torch.quantization.QConfig(activation=torch.quantization.observer.MinMaxObserver.with_args(reduce_range=False),
             weight=torch.quantization.default_weight_observer)
         if args.per_tensor_linear:

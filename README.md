@@ -1,7 +1,7 @@
-Intel® Low Precision Optimization Tool (iLiT)
+Intel® Low Precision Optimization Tool
 =========================================
 
-Intel® Low Precision Optimization Tool (iLiT) is an open-source python library which is intended to deliver a unified low-precision inference interface cross multiple Intel optimized DL frameworks on both CPU and GPU. It supports automatic accuracy-driven tuning strategies, along with additional objectives like performance, model size, or memory footprint. It also provides the easy extension capability for new backends, tuning strategies, metrics and objectives.
+Intel® Low Precision Optimization Tool is an open-source python library which is intended to deliver a unified low-precision inference interface cross multiple Intel optimized DL frameworks on both CPU and GPU. It supports automatic accuracy-driven tuning strategies, along with additional objectives like performance, model size, or memory footprint. It also provides the easy extension capability for new backends, tuning strategies, metrics and objectives.
 
 > **WARNING**
 >
@@ -20,9 +20,9 @@ Currently supported tuning strategies are:
 
 # Documentation
 
-* [Introduction](docs/introduction.md) explains iLiT infrastructure, design philosophy, supported functionality, details of tuning strategy implementations and tuning result on popular models.
+* [Introduction](docs/introduction.md) explains Intel® Low Precision Optimization Tool infrastructure, design philosophy, supported functionality, details of tuning strategy implementations and tuning result on popular models.
 * [Tutorial](docs/tutorial.md) provides
-comprehensive step-by-step instructions of how to enable iLiT on sample models.
+comprehensive step-by-step instructions of how to enable Intel® Low Precision Optimization Tool on sample models.
 
 # Install from source 
 
@@ -47,15 +47,15 @@ comprehensive step-by-step instructions of how to enable iLiT on sample models.
 
 ### Hardware
 
-iLiT supports systems based on Intel 64 architecture or compatible processors.
+Intel® Low Precision Optimization Tool supports systems based on Intel 64 architecture or compatible processors.
 
 ### Software
 
-iLiT requires to install Intel optimized framework version for TensorFlow, PyTorch, and MXNet.
+Intel® Low Precision Optimization Tool requires to install Intel optimized framework version for TensorFlow, PyTorch, and MXNet.
 
 # Tuning Zoo
 
-The followings are the examples integrated with iLiT for auto tuning.
+The followings are the examples integrated with Intel® Low Precision Optimization Tool for auto tuning.
 
 | Model                                                     | Framework | Model                                                   | Framework | Model                                                                  | Framework  |
 |-----------------------------------------------------------|-----------|---------------------------------------------------------|-----------|------------------------------------------------------------------------|------------|
@@ -88,7 +88,7 @@ Please submit your questions, feature requests, and bug reports on the
 
 # Contributing
 
-We welcome community contributions to iLiT. If you have an idea on how
+We welcome community contributions to Intel® Low Precision Optimization Tool. If you have an idea on how
 to improve the library:
 
 * For changes impacting the public API, submit
@@ -107,7 +107,7 @@ contributors are expected to adhere to the
 
 # License
 
-iLiT is licensed under
+Intel® Low Precision Optimization Tool is licensed under
 [Apache License Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).  This
 software includes components with separate copyright notices and license
 terms. Your use of the source code for these components is subject to the terms
@@ -127,10 +127,10 @@ See accompanying [LICENSE](LICENSE) file for full license text and copyright not
 
 ## Citing
 
-If you use iLiT in your research or wish to refer to the tuning results published in the [Tuning Zoo](#tuning-zoo), please use the following BibTeX entry.
+If you use Intel® Low Precision Optimization Tool in your research or wish to refer to the tuning results published in the [Tuning Zoo](#tuning-zoo), please use the following BibTeX entry.
 
 ```
-@misc{iLiT,
+@misc{Intel® Low Precision Optimization Tool,
   author =       {Feng Tian, Chuanqi Wang, Guoming Zhang, Penghui Cheng, Pengxin Yuan, Haihao Shen, and Jiong Gong},
   title =        {Intel® Low Precision Optimization Tool},
   howpublished = {\url{https://github.com/intel/lp-opt-tool}},

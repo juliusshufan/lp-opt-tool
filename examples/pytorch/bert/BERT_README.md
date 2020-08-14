@@ -1,13 +1,13 @@
 Step-by-Step
 ============
 
-This document is used to list steps of reproducing PyTorch BERT iLiT tuning zoo result.
+This document is used to list steps of reproducing PyTorch BERT tuning zoo result.
 
 > **Note**
 >
 > PyTorch quantization implementation in imperative path has limitation on automatically execution.
 > It requires to manually add QuantStub and DequantStub for quantizable ops, it also requires to manually do fusion operation.
-> iLiT has no capability to solve this framework limitation. iLiT supposes user have done these two steps before invoking iLiT interface.
+> Intel® Low Precision Optimization Tool has no capability to solve this framework limitation. Intel® Low Precision Optimization Tool supposes user have done these two steps before invoking Intel® Low Precision Optimization Tool interface.
 > For details, please refer to https://pytorch.org/docs/stable/quantization.html
 > The latest version of pytorch enabled INT8 layer_norm op, but the accuracy was regression. So you should tune BERT model on commit 24aac321718d58791c4e6b7cfa50788a124dae23.
 
@@ -16,7 +16,7 @@ This document is used to list steps of reproducing PyTorch BERT iLiT tuning zoo 
 ### 1. Installation
 
   ```Shell
-  # Install iLiT
+  # Install Intel® Low Precision Optimization Tool
   pip install ilit
 
   # Install PyTorch
@@ -58,14 +58,14 @@ This document is used to list steps of reproducing PyTorch BERT iLiT tuning zoo 
   ./run_all.sh
   ```
 
-Examples of enabling iLiT
+Examples of enabling Intel® Low Precision Optimization Tool
 =========================
 
-This is a tutorial of how to enable BERT model with iLiT.
+This is a tutorial of how to enable BERT model with Intel® Low Precision Optimization Tool.
 
 # User Code Analysis
 
-iLiT supports two usages:
+Intel® Low Precision Optimization Tool supports two usages:
 
 1. User specifies fp32 'model', calibration dataset 'q_dataloader', evaluation dataset "eval_dataloader" and metrics in tuning.metrics field of model-specific yaml config file.
 
@@ -88,7 +88,7 @@ tuning:
     random_seed: 9527
 ```
 Here we set accuracy target as tolerating 0.01 relative accuracy loss of baseline. The default tuning strategy is basic strategy. The timeout 0 means early stop as well as a tuning config meet accuracy target.
-> **Note** : iLiT tool don't support "mse" tuning strategy for pytorch framework
+> **Note** : Intel® Low Precision Optimization Tool don't support "mse" tuning strategy for pytorch framework
 
 ### prepare
 PyTorch quantization requires two manual steps:
@@ -119,7 +119,7 @@ class Bert_DataLoader(DataLoader):
 ```
 
 ```
-if args.do_ilit_tune:
+if args.tune:
     def eval_func_for_ilit(model):
         result, _ = evaluate(args, model, tokenizer)
         for key in sorted(result.keys()):

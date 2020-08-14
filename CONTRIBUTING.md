@@ -1,5 +1,5 @@
 # Contributing guidelines
-If you have improvements to iLiT, send us your pull requests for
+If you have improvements to Intel® Low Precision Optimization Tool, send us your pull requests for
 [review](https://github.com/intel/lp-opt-tool/pulls)! For those
 just getting started, Github has a
 [how to](https://help.github.com/articles/using-pull-requests/).

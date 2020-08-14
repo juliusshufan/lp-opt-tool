@@ -1,7 +1,7 @@
 Step-by-Step
 ============
 
-This document is used to list steps of reproducing MXNet SSD-Mobilenet1.0/SSD-ResNet50_v1 with COCO dataset iLiT tuning zoo result.
+This document is used to list steps of reproducing MXNet SSD-Mobilenet1.0/SSD-ResNet50_v1 with COCO dataset tuning zoo result.
 
 
 
@@ -10,7 +10,7 @@ This document is used to list steps of reproducing MXNet SSD-Mobilenet1.0/SSD-Re
 ### 1. Installation
 
   ```Shell
-  # Install iLiT
+  # Install Intel® Low Precision Optimization Tool
   pip install ilit
 
   # Install MXNet
@@ -42,20 +42,20 @@ python eval_ssd.py --network=mobilenet1.0 --data-shape=512 --batch-size=256 --da
 python eval_ssd.py --network=resnet50_v1 --data-shape=512 --batch-size=256 --dataset coco
 ```
 
-Examples of enabling iLiT auto tuning on MXNet Object detection
+Examples of enabling Intel® Low Precision Optimization Tool auto tuning on MXNet Object detection
 =======================================================
 
-This is a tutorial of how to enable a MXNet Object detection model with iLiT.
+This is a tutorial of how to enable a MXNet Object detection model with Intel® Low Precision Optimization Tool.
 
 # User Code Analysis
 
-iLiT supports two usages:
+Intel® Low Precision Optimization Tool supports two usages:
 
 1. User specifies fp32 "model", calibration dataset "q_dataloader", evaluation dataset "eval_dataloader" and metric in tuning.metric field of model-specific yaml config file.
 
 2. User specifies fp32 "model", calibration dataset "q_dataloader" and a custom "eval_func" which encapsulates the evaluation dataset and metric by itself.
 
-As this example use COCO dataset, use COCOEval as metric which is can find [here](https://cocodataset.org/). So we integrate MXNet SSD-Mobilenet1.0/SSD-ResNet50_v1 with iLiT by the second use case.
+As this example use COCO dataset, use COCOEval as metric which is can find [here](https://cocodataset.org/). So we integrate MXNet SSD-Mobilenet1.0/SSD-ResNet50_v1 with Intel® Low Precision Optimization Tool by the second use case.
 
 ### Write Yaml config file
 
@@ -103,10 +103,10 @@ After prepare step is done, we just need update main.py like below.
 
 ```python
    
-    # Doing iLiT auto-tuning here
+    # Doing Intel® Low Precision Optimization Tool auto-tuning here
     import ilit
     ssd_tuner = ilit.Tuner("./ssd.yaml")
     ssd_tuner.tune(net, q_dataloader=val_data, eval_dataloader=val_dataset, eval_func=eval_func)
 ```
 
-The iLiT tune() function will return a best quantized model during timeout constrain.
+The tune() function will return a best quantized model during timeout constrain.

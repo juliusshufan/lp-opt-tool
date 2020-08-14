@@ -748,7 +748,7 @@ if __name__ == '__main__':
             warnings.warn('INT8 Quantization for BERT need mxnet-mkl >= 1.6.0b20200115')
     else:
         # train(task.metrics)
-        # iLiT auto-tuning
+        # ilit auto-tuning
         if only_inference:
             calib_data = dev_data_list[0][1]
             import ilit

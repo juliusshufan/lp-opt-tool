@@ -3,7 +3,7 @@ import time
 import tracemalloc
 from .utils.utility import get_size
 
-"""The objectives supported by iLiT, which is driven by accuracy.
+"""The objectives supported by ilit, which is driven by accuracy.
    To support new objective, developer just need implement a new subclass in this file.
 """
 OBJECTIVES = {}
@@ -23,7 +23,7 @@ def objective_registry(cls):
     return cls
 
 class Objective(object):
-    """The base class of objectives supported by iLiT.
+    """The base class of objectives supported by ilit.
 
     Args:
         accuracy_criterion (dict): The dict of supported accuracy criterion.

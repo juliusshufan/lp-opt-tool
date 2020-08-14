@@ -525,8 +525,8 @@ def main():
                         help="Whether to run fp32 inference.")
     parser.add_argument("--mkldnn_eval", action='store_true',
                         help="evaluation with MKLDNN")
-    parser.add_argument("--do_ilit_tune", action='store_true',
-                        help="run iLiT tool to tune int8 acc.")
+    parser.add_argument("--tune", action='store_true',
+                        help="run ilit to tune int8 acc.")
     parser.add_argument("--task_name", default=None, type=str, required=True,
                         help="SQuAD task")
     parser.add_argument("--warmup", type=int, default=5,
@@ -544,7 +544,7 @@ def main():
         raise ValueError("Output directory ({}) already exists and is not empty. Use --overwrite_output_dir to overcome.".format(args.output_dir))
 
     mix_qkv = False
-    if args.do_calibration or args.do_int8_inference or args.do_ilit_tune:
+    if args.do_calibration or args.do_int8_inference or args.tune:
        mix_qkv = True
 
     # Setup distant debugging if needed
@@ -661,7 +661,7 @@ def main():
                result = dict((k + ('_{}'.format(global_step) if global_step else ''), v) for k, v in result.items())
                results.update(result)
 
-            if args.do_ilit_tune:
+            if args.tune:
                 def eval_func_for_ilit(model):
                     result, _ = evaluate(args, model, tokenizer)
                     for key in sorted(result.keys()):
